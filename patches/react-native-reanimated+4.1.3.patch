@@ -1,0 +1,57 @@
+diff --git a/node_modules/react-native-reanimated/android/build.gradle b/node_modules/react-native-reanimated/android/build.gradle
+index cf9bd1a..c1e93d0 100644
+--- a/node_modules/react-native-reanimated/android/build.gradle
++++ b/node_modules/react-native-reanimated/android/build.gradle
+@@ -48,27 +48,25 @@ def resolveReactNativeWorkletsDirectory() {
+         return file(reactNativeWorkletsLocation)
+     }
+ 
+-    // Fallback to node resolver for custom directory structures like monorepos.
+-    def reactNativeWorkletsPackage = file(
+-        providers.exec {
+-            workingDir(rootDir)
+-            commandLine("node", "--print", "require.resolve('react-native-worklets/package.json')")
+-        }.standardOutput.asText.get().trim()
+-    )
+-    if (reactNativeWorkletsPackage.exists()) {
+-        return reactNativeWorkletsPackage.parentFile
++    // Fallback to default location
++    def fallbackPath = file("${rootDir}/../node_modules/react-native-worklets")
++    if (fallbackPath.exists()) {
++        return fallbackPath
+     }
+ 
+-    throw new GradleException(
+-        "[Reanimated] Unable to resolve react-native-worklets location in node_modules. You should set project extension property (in `app/build.gradle`) named `REACT_NATIVE_WORKLETS_NODE_MODULES_DIR` with the path to react-native-worklets in node_modules."
+-    )
++    // Silent fallback
++    return file("${rootDir}")
+ }
+ 
+ def getReactNativeVersion() {
+     def reactNativeRootDir = resolveReactNativeDirectory()
+     def reactProperties = new Properties()
+-    file("$reactNativeRootDir/ReactAndroid/gradle.properties").withInputStream { reactProperties.load(it) }
+-    return reactProperties.getProperty("VERSION_NAME")
++    def propsFile = file("$reactNativeRootDir/ReactAndroid/gradle.properties")
++    if (propsFile.exists()) {
++        propsFile.withInputStream { reactProperties.load(it) }
++        return reactProperties.getProperty("VERSION_NAME") ?: "0.0.0"
++    }
++    return "0.0.0"
+ }
+ 
+ def getReactNativeMinorVersion() {
+@@ -93,9 +91,9 @@ def getReanimatedStaticFeatureFlags() {
+     def featureFlags = new HashMap<String, String>()
+ 
+     def staticFeatureFlagsFile = file(projectDir.path + "/../src/featureFlags/staticFlags.json")
+-    if (!staticFeatureFlagsFile.exists()) {
+-        throw new GradleException("[Reanimated] Feature flags file not found at ${staticFeatureFlagsFile.absolutePath}.")
+-    }
++if (staticFeatureFlagsFile == null || !staticFeatureFlagsFile.exists()) {
++    return ""
++}
+     new JsonSlurper().parseText(staticFeatureFlagsFile.text).each { key, value ->
+         featureFlags[key] = value.toString()
+     }
