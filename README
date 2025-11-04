@@ -1,0 +1,57 @@
+# Appalachian Archives Mobile
+
+A React Native app built with Expo for browsing and playing digitized video archives. Designed for use with Expo Go and optimized for mobile playback.
+
+## 📦 Tech Stack
+
+- [Expo](https://expo.dev/) (managed workflow)
+- React Native + TypeScript
+- `expo-av` for native video playback
+- React Navigation (stack-based)
+- Metro bundler for local development
+
+## 🚀 Getting Started
+
+### 1. Clone the repo
+
+```bash
+git clone https://github.com/YOUR_USERNAME/appalachian-archives-mobile.git
+cd appalachian-archives-mobile
+
+Install Dependencies
+npm install
+# or
+yarn install
+
+Start the development server
+npx expo start
+
+Project Structure
+
+.
+├── App.tsx
+├── navigation/
+│   └── RootStack.tsx
+├── screens/
+│   ├── VideoListScreen.tsx
+│   └── VideoPlayerScreen.tsx
+├── assets/
+├── types/
+│   └── navigationTypes.ts
+└── ...
+Features
+Browse a list of digitized videos
+Tap to play videos using native controls
+Works in Expo Go and on physical Android devices
+Type-safe navigation and props
+
+Development Notes
+Video playback uses expo-av, not react-native-video
+Metro cache may need to be cleared after dependency changes:
+npx expo start -c
+
+Emulator port forwarding
+adb reverse tcp:8081 tcp:8081
+
+License
+MIT — Appalachian Archives LLC
