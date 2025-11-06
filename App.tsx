@@ -1,5 +1,2 @@
-import MainNavigator from './MainNavigator';
+import 'expo-router/entry';
 
-export default function App() {
-  return <MainNavigator />;
-}

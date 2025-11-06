@@ -1,0 +1,6 @@
+adb shell am force-stop host.exp.exponent
+emulator -avd Small_Phone
+emulator -avd Medium_Phone_API_36
+adb kill-server
+adb start-server
+npx expo start --clear

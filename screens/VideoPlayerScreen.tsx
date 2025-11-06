@@ -1,7 +1,7 @@
-import React from 'react';
-import { View, Text } from 'react-native';
-import { Video, ResizeMode } from 'expo-av';
 import { RouteProp } from '@react-navigation/native';
+import { ResizeMode, Video } from 'expo-av';
+import React from 'react';
+import { Text, View } from 'react-native';
 import { RootStackParamList } from '../navigationTypes';
 
 type VideoPlayerRouteProp = RouteProp<RootStackParamList, 'VideoPlayer'>;
