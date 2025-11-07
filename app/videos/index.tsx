@@ -1,5 +1,5 @@
 // app/videos/index.tsx
-import { useRouter } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { FlatList, Image, Pressable, Text, View } from 'react-native';
 
@@ -29,7 +29,15 @@ export default function VideoListScreen() {
   }, []);
 
   return (
-    <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: "#F0E4C6" }}>
+      <Stack.Screen
+        options={{
+        title: "Your Videos",
+        headerStyle: { backgroundColor: "#F0E4C6" },
+        headerTitleStyle: { fontWeight: "bold", fontSize: 20 },
+  }
+  }
+/>
       <FlatList
         data={videos}
         keyExtractor={(item) => item.id}

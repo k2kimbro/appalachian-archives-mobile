@@ -12,7 +12,7 @@ module.exports = defineConfig({
   icon: "./assets/images/aaicon.png",
   splash: {
     image: "./assets/images/splashscreen.png",
-    resizeMode: "contain",
+    resizeMode: "cover",
     backgroundColor: "#F0E4C6"
   },
   scheme: "appalachianarchivesmobile",
@@ -30,7 +30,8 @@ module.exports = defineConfig({
     },
     edgeToEdgeEnabled: true,
     predictiveBackGestureEnabled: false,
-    package: "com.anonymous.appalachianarchivesmobile"
+    package: "com.anonymous.appalachianarchivesmobile",
+    label: " " // single space to suppress name
   },
   web: {
     output: "single",

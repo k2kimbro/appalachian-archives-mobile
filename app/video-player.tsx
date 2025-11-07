@@ -1,9 +1,11 @@
 import { ResizeMode, Video } from 'expo-av';
-import { useLocalSearchParams } from 'expo-router';
+import { Stack, useLocalSearchParams } from "expo-router";
 import React from 'react';
 import { Text, View } from 'react-native';
 
 export default function VideoPlayerScreen() {
+
+  <Stack.Screen options={{ headerShown: false }} />
   const { videoId, title, thumbnail, url } = useLocalSearchParams();
 
   return (

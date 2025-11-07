@@ -1,5 +1,5 @@
 // app/index.tsx
-import { useRouter } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function Index() {
@@ -7,7 +7,9 @@ export default function Index() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome to Appalachian Archives</Text>
+      <Stack.Screen options={{ headerShown: false }} />
+      <Text style={styles.title}>Welcome to</Text>
+      <Text style={styles.title}>Appalachian Archives</Text>
       <TouchableOpacity onPress={() => router.push('/videos')}>
         <Text style={styles.button}>Go to Your Videos</Text>
       </TouchableOpacity>
