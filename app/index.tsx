@@ -8,7 +8,7 @@ export default function Index() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome to Appalachian Archives</Text>
-      <TouchableOpacity onPress={() => router.push('./videos')}>
+      <TouchableOpacity onPress={() => router.push('/videos')}>
         <Text style={styles.button}>Go to Your Videos</Text>
       </TouchableOpacity>
     </View>

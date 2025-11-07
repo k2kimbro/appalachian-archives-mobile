@@ -5,7 +5,7 @@
     "allowSyntheticDefaultImports": true,
     "allowJs": true,
     "strict": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "target": "esnext",
     "module": "esnext",
     "lib": [
@@ -13,13 +13,23 @@
     ],
     "types": [
       "expo-router"
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "~/*": [
+        "./app/*"
+      ]
+    }
   },
   "extends": "expo/tsconfig.base",
   "include": [
     "**/*.ts",
     "**/*.tsx",
+    "app.config.mjs",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-  ]
+  ],
+  "skipLibCheck": true,
+  "noUncheckedIndexedAccess": true,
+  "resolveJsonModule": true
 }

@@ -1,8 +1,7 @@
+// app/videos/index.tsx
+import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, Pressable, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../navigationTypes';
+import { FlatList, Image, Pressable, Text, View } from 'react-native';
 
 interface VideoItem {
   id: string;
@@ -12,7 +11,7 @@ interface VideoItem {
 }
 
 export default function VideoListScreen() {
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList, 'VideoList'>>();
+  const router = useRouter();
   const [videos, setVideos] = useState<VideoItem[]>([]);
 
   useEffect(() => {
@@ -37,11 +36,14 @@ export default function VideoListScreen() {
         renderItem={({ item }) => (
           <Pressable
             onPress={() =>
-              navigation.navigate('VideoPlayer', {
-                video: {
-                  ...item,
-                  url: item.videoUrl, // remap for expected type
-                },
+                router.push({
+                pathname: '/video-player',
+                params: {
+      videoId: item.id,
+      title: item.title,
+      thumbnail: item.thumbnail,
+      url: item.videoUrl,
+    },
               })
             }
             style={{ padding: 10, borderBottomWidth: 1 }}
