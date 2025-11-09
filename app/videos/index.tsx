@@ -1,7 +1,20 @@
 // app/videos/index.tsx
 import { Stack, useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { FlatList, Image, Pressable, Text, View } from 'react-native';
+import { FlatList, Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+const styles = StyleSheet.create({
+  controlBar: {
+    position: 'absolute',
+    bottom: 0,
+    height: 50, // adjust as needed
+    width: '100%',
+    backgroundColor: '#2A3632', // ← your desired color
+    zIndex: 10,
+  },
+});
+
 
 interface VideoItem {
   id: string;
@@ -38,6 +51,7 @@ export default function VideoListScreen() {
   }
   }
 />
+<SafeAreaView style={{ flex: 1, backgroundColor: "#F0E4C6" }}>
       <FlatList
         data={videos}
         keyExtractor={(item) => item.id}
@@ -60,7 +74,11 @@ export default function VideoListScreen() {
             <Text style={{ fontSize: 16 }}>{item.title}</Text>
           </Pressable>
         )}
+         contentContainerStyle={{ paddingBottom: 80 }} // 👈 buffer at bottom
       />
+      </SafeAreaView>
+      <View style={styles.controlBar} />
+
     </View>
   );
 }

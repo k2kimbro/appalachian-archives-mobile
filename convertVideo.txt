@@ -1,3 +1,4 @@
 ffmpeg -i kimbrough_001.avi -c:v libx264 -pix_fmt yuv420p -preset medium -crf 20 -c:a aac -b:a 192k -movflags +faststart kimbrough_001.mp4
 ffmpeg -i kimbrough_002.avi -c:v libx264 -pix_fmt yuv420p -preset medium -crf 20 -c:a aac -b:a 192k -movflags +faststart kimbrough_002.mp4
 ffmpeg -i kimbrough_003.avi -c:v libx264 -pix_fmt yuv420p -preset medium -crf 20 -c:a aac -b:a 192k -movflags +faststart kimbrough_003.mp4
+ffmpeg -i kimbrough_004.avi -c:v libx264 -pix_fmt yuv420p -preset medium -crf 20 -c:a aac -b:a 192k -movflags +faststart kimbrough_004.mp4
