@@ -1,0 +1,11 @@
+diff --git a/node_modules/expo/AppEntry.js b/node_modules/expo/AppEntry.js
+index 9248732..5b83418 100644
+--- a/node_modules/expo/AppEntry.js
++++ b/node_modules/expo/AppEntry.js
+@@ -1,5 +1 @@
+-import registerRootComponent from 'expo/src/launch/registerRootComponent';
+-
+-import App from '../../App';
+-
+-registerRootComponent(App);
++import 'expo-router/entry';
