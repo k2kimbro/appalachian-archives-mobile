@@ -3,6 +3,7 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useCallback, useEffect, useState } from 'react';
 import { LayoutChangeEvent, View } from 'react-native';
+import { theme } from 'theme';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -36,9 +37,14 @@ export default function Layout() {
 
   if (!isAppReady) return null;
 
-  return (
-    <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-      <Stack />
-    </View>
-  );
+return (
+  <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+    <Stack
+      screenOptions={{
+        headerStyle: theme.header.style,
+        headerTitleStyle: theme.header.titleStyle,
+      }}
+    />
+  </View>
+);
 }

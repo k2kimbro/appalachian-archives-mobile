@@ -3,6 +3,8 @@ import { Stack, useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { FlatList, Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { theme } from 'theme'; // adjust path if needed
+import { ControlBar } from '../components/ControlBar';
 
 const styles = StyleSheet.create({
   controlBar: {
@@ -10,9 +12,34 @@ const styles = StyleSheet.create({
     bottom: 0,
     height: 50, // adjust as needed
     width: '100%',
-    backgroundColor: '#2A3632', // ← your desired color
+    backgroundColor: theme.colors.darkGreen, // ← from theme
     zIndex: 10,
   },
+  listItem: {
+    padding: theme.spacing.md,
+    borderBottomWidth: 1,
+    borderBottomColor: theme.colors.darkGreen,
+  },
+  listItemText: {
+    fontSize: theme.typography.fontSize.md,
+    color: theme.colors.black,
+  },
+  thumbnail: {
+    width: 150,
+    height: 100,
+    borderRadius: theme.borderRadius.sm,
+  },
+  screen: {
+    flex: 1,
+    backgroundColor: theme.colors.beige,
+  },
+  safeArea: {
+    flex: 1,
+    backgroundColor: theme.colors.beige,
+  },
+  listContent: {
+  paddingBottom: theme.spacing.xl,
+},
 });
 
 
@@ -42,43 +69,46 @@ export default function VideoListScreen() {
   }, []);
 
   return (
-      <View style={{ flex: 1, backgroundColor: "#F0E4C6" }}>
-      <Stack.Screen
-        options={{
-        title: "Your Videos",
-        headerStyle: { backgroundColor: "#F0E4C6" },
-        headerTitleStyle: { fontWeight: "bold", fontSize: 20 },
-  }
-  }
-/>
-<SafeAreaView style={{ flex: 1, backgroundColor: "#F0E4C6" }}>
-      <FlatList
-        data={videos}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <Pressable
-            onPress={() =>
-                router.push({
-                pathname: '/video-player',
-                params: {
-      videoId: item.id,
-      title: item.title,
-      thumbnail: item.thumbnail,
-      url: item.videoUrl,
-    },
-              })
-            }
-            style={{ padding: 10, borderBottomWidth: 1 }}
-          >
-            <Image source={{ uri: item.thumbnail }} style={{ width: 150, height: 100 }} />
-            <Text style={{ fontSize: 16 }}>{item.title}</Text>
-          </Pressable>
-        )}
-         contentContainerStyle={{ paddingBottom: 80 }} // 👈 buffer at bottom
-      />
-      </SafeAreaView>
-      <View style={styles.controlBar} />
-
-    </View>
+      <View style={styles.screen}>
+  <Stack.Screen
+    options={{
+      title: "Your Videos",
+      headerStyle: { backgroundColor: theme.colors.beige },
+      headerTitleStyle: {
+        fontWeight: theme.typography.fontWeight.bold,
+        fontSize: theme.typography.fontSize.lg,
+        color: theme.colors.primaryGreen,
+        fontFamily: 'Merriweather-Bold',
+      },
+    }}
+  />
+  <SafeAreaView style={styles.safeArea}>
+    <FlatList
+      data={videos}
+      keyExtractor={(item) => item.id}
+      renderItem={({ item }) => (
+        <Pressable
+          onPress={() =>
+            router.push({
+              pathname: '/video-player',
+              params: {
+                videoId: item.id,
+                title: item.title,
+                thumbnail: item.thumbnail,
+                url: item.videoUrl,
+              },
+            })
+          }
+          style={styles.listItem}
+        >
+          <Image source={{ uri: item.thumbnail }} style={styles.thumbnail} />
+          <Text style={styles.listItemText}>{item.title}</Text>
+        </Pressable>
+      )}
+      contentContainerStyle={styles.listContent}
+    />
+  </SafeAreaView>
+  <ControlBar />
+</View>
   );
 }

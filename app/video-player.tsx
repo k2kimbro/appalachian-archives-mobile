@@ -2,6 +2,15 @@ import { ResizeMode, Video } from 'expo-av';
 import { router, Stack, useLocalSearchParams } from "expo-router";
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ThemedButton } from '../components/ThemedButton';
+import { theme } from '../theme'; // adjust path if needed
+import { ControlBar } from './components/ControlBar';
+
+<ThemedButton
+  title="← Go Back"
+  onPress={() => router.back()}
+  variant="primary"
+/>
 
 export default function VideoPlayerScreen() {
 
@@ -10,7 +19,7 @@ export default function VideoPlayerScreen() {
   const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F0E4C6', // immersive black background
+    backgroundColor: theme.colors.beige, // beige background
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
@@ -21,7 +30,7 @@ export default function VideoPlayerScreen() {
   },
   title: {
     marginTop: 10,
-    color: '#F0E4C6',
+    color: theme.colors.beige,
     fontSize: 16,
     fontFamily: 'OpenSans-Regular',
     textAlign: 'center',
@@ -32,16 +41,25 @@ backButton: {
   alignSelf: 'center',
   paddingVertical: 10,
   paddingHorizontal: 20,
-  backgroundColor: '#3B4C47',
+  backgroundColor: theme.colors.primaryGreen,
   borderRadius: 6,
 },
-
 backButtonText: {
-  color: '#F0E4C6',
+  color: theme.colors.beige,
   fontSize: 16,
   fontFamily: 'OpenSans-Regular',
   textAlign: 'center',
 },
+controlBar: {
+  position: 'absolute',
+  bottom: 0,
+  left: 0,          // 👈 ensure it anchors to the left edge
+  right: 0,         // 👈 ensure it anchors to the right edge
+  height: 50,
+  backgroundColor: theme.colors.darkGreen, // should be dark green
+  zIndex: 10,
+},
+
 });
 
   return (
@@ -51,12 +69,17 @@ backButtonText: {
         source={{ uri: String(url) }}
         useNativeControls
         resizeMode={ResizeMode.CONTAIN}
-        style={{ width: '100%', height: 300 }}
+        style={styles.video}
       />
       <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
-        <Text style={styles.backButtonText}>← Go Back</Text>
-        </TouchableOpacity>
+        <ThemedButton
+          title="← Go Back"
+          onPress={() => router.back()}
+          variant="primary"
+      />
+      </TouchableOpacity>
       <Text style={{ marginTop: 10 }}>{String(title)}</Text>
+    <ControlBar />
     </View>
   );
 }
