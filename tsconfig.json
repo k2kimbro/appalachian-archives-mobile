@@ -25,9 +25,7 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
-    "app.config.mjs",
-    ".expo/types/**/*.ts",
-    "expo-env.d.ts"
+    "app.config.mjs"
   ],
   "skipLibCheck": true,
   "noUncheckedIndexedAccess": true,

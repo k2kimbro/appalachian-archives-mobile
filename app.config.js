@@ -1,11 +1,6 @@
-const defineConfig = (config) => ({
-  ...config,
-  entryPoint: './node_modules/expo-router/entry',
-});
-
-module.exports = defineConfig({
+// app.config.js
+module.exports = {
   name: "Appalachian Archives",
-  description: "Preserving your memories, one frame at a time",
   slug: "appalachian-archives-mobile",
   version: "1.0.0",
   orientation: "portrait",
@@ -17,7 +12,6 @@ module.exports = defineConfig({
   },
   scheme: "appalachianarchivesmobile",
   userInterfaceStyle: "automatic",
-  newArchEnabled: true,
   ios: {
     supportsTablet: true
   },
@@ -30,8 +24,8 @@ module.exports = defineConfig({
     },
     edgeToEdgeEnabled: true,
     predictiveBackGestureEnabled: false,
-    package: "com.anonymous.appalachianarchivesmobile",
-    label: " " // single space to suppress name
+    package: "com.appalachianarchives.mobile",
+    label: "Appalachian Archives"
   },
   web: {
     output: "single",
@@ -42,8 +36,18 @@ module.exports = defineConfig({
     "expo-font",
     "expo-router"
   ],
-  experiments: {
-    typedRoutes: true,
-    reactCompiler: true
+  extra: {
+    eas: {
+      projectId: "7f3db69e-b6f8-4978-870c-682c98fed95d"
+    },
+    description: `Preserving your memories,
+    one frame at a time.`,
+    entryPoint: "./node_modules/expo-router/entry",
+    newArchEnabled: true,
+    experiments: {
+      typedRoutes: true,
+      reactCompiler: true
+    },
+    androidLabel: "Appalachian Archives"
   }
-});
+};

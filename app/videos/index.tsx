@@ -6,6 +6,42 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { theme } from 'theme'; // adjust path if needed
 import { ControlBar } from '../components/ControlBar';
 
+function normalizeVideos(data: any): VideoItem[] {
+  // If backend returns { videos: [...] }
+  if (data && Array.isArray(data.videos)) {
+    return data.videos.map((v: any) => ({
+      id: v.id || v._id || String(Math.random()),
+      title: v.title || v.name || "Untitled",
+      thumbnail: v.thumbnail || v.thumb || "",
+      videoUrl: v.videoUrl || v.url || ""
+    }));
+  }
+
+  // If backend returns an array directly
+  if (Array.isArray(data)) {
+    return data.map((v: any) => ({
+      id: v.id || v._id || String(Math.random()),
+      title: v.title || v.name || "Untitled",
+      thumbnail: v.thumbnail || v.thumb || "",
+      videoUrl: v.videoUrl || v.url || ""
+    }));
+  }
+
+  // If backend returns a single object
+  if (data && typeof data === "object") {
+    return [{
+      id: data.id || data._id || String(Math.random()),
+      title: data.title || data.name || "Untitled",
+      thumbnail: data.thumbnail || data.thumb || "",
+      videoUrl: data.videoUrl || data.url || ""
+    }];
+  }
+
+  // Fallback: empty list
+  return [];
+}
+
+
 const styles = StyleSheet.create({
   controlBar: {
     position: 'absolute',
@@ -42,7 +78,6 @@ const styles = StyleSheet.create({
 },
 });
 
-
 interface VideoItem {
   id: string;
   title: string;
@@ -54,19 +89,21 @@ export default function VideoListScreen() {
   const router = useRouter();
   const [videos, setVideos] = useState<VideoItem[]>([]);
 
-  useEffect(() => {
-    const fetchVideos = async () => {
-      try {
-        const response = await fetch('http://192.168.2.108:3000/api/media');
-        const data = await response.json();
-        setVideos(Array.isArray(data) ? data : [data]);
-      } catch (error) {
-        console.error('Failed to fetch videos:', error);
-      }
-    };
+useEffect(() => {
+  const fetchVideos = async () => {
+    try {
+      const response = await fetch('http://192.168.2.108:3000/api/media');
+      const data = await response.json() as VideoItem[]
+      setVideos(data);
+      console.log("Fetched videos:", data);
+    } catch (error) {
+      console.error('Failed to fetch videos:', error);
+    }
+  };
 
-    fetchVideos();
-  }, []);
+  fetchVideos();
+}, []);
+
 
   return (
       <View style={styles.screen}>
