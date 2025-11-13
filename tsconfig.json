@@ -12,7 +12,8 @@
       "esnext"
     ],
     "types": [
-      "expo-router"
+      "expo-router",
+      "node"
     ],
     "baseUrl": ".",
     "paths": {

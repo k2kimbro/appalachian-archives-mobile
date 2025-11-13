@@ -3,7 +3,7 @@ module.exports = {
   name: "Appalachian Archives",
   slug: "appalachian-archives-mobile",
   version: "1.0.0",
-  orientation: "portrait",
+  orientation: "default",
   icon: "./assets/images/aaicon.png",
   splash: {
     image: "./assets/images/splashscreen.png",
@@ -25,7 +25,8 @@ module.exports = {
     edgeToEdgeEnabled: true,
     predictiveBackGestureEnabled: false,
     package: "com.appalachianarchives.mobile",
-    label: "Appalachian Archives"
+    label: "Appalachian Archives",
+    showDevClientDebugBanner: false,
   },
   web: {
     output: "single",
@@ -34,7 +35,8 @@ module.exports = {
   plugins: [
     "expo-av",
     "expo-font",
-    "expo-router"
+    "expo-router",
+    "react-native-video"
   ],
   extra: {
     eas: {
