@@ -1,0 +1,7 @@
+keytool -genkey -v -keystore appalachian-archives.keystore -alias apparchives -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Ken Kimbrough, OU=Development, O=Appalachian Archives, L=Cumming, ST=Georgia, C=US"
+
+
+jarsigner -verbose -keystore d:\appalachian-archives-mobile\appalachian-archives.keystore app-release-unsigned.apk apparchives
+C:\Users\kkimb\AppData\Local\Android\Sdk\build-tools\36.1.0\apksigner.bat sign --ks d:\appalachian-archives-mobile\appalachian-archives.keystore --ks-key-alias apparchives app-release.apk
+
+C:\Users\kkimb\AppData\Local\Android\Sdk\build-tools\36.1.0\apksigner.bat verify --verbose app-release.apk

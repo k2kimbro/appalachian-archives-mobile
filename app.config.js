@@ -13,7 +13,9 @@ module.exports = {
   scheme: "appalachianarchivesmobile",
   userInterfaceStyle: "automatic",
   ios: {
-    supportsTablet: true
+    supportsTablet: true,
+    bundleIdentifier: "com.appalachianarchives.mobile",
+    buildNumber: "1"
   },
   android: {
     adaptiveIcon: {
@@ -27,6 +29,8 @@ module.exports = {
     package: "com.appalachianarchives.mobile",
     label: "Appalachian Archives",
     showDevClientDebugBanner: false,
+    versionCode: 1,
+    permissions: []
   },
   web: {
     output: "single",
